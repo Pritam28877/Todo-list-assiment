@@ -12,7 +12,13 @@ exports.getAllTodos = async (req, res) => {
 //get a specific todo
 exports.getTodo = async (req, res) => {
   const { id } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.status(404).json({ message: "No todo with that id" });
+  }
+
   const todo = await TodoList.findById(id);
+
   if (!todo) {
     res.status(404).json({ message: "No todo with that id" });
   }
@@ -49,6 +55,9 @@ exports.updateTodo = async (req, res) => {
 //delete a todo
 exports.deleteTodo = async (req, res) => {
   const { id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    res.status(404).json({ message: "No todo with that id" });
+  }
   try {
     await TodoList.findByIdAndDelete(id);
     res.status(200).json({ message: "Todo deleted successfully" });
