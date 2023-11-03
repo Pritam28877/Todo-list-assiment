@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 //get all todos
 exports.getAllTodos = async (req, res) => {
   try {
-    const todoList = await TodoList.find({ user_id }).sort({ createdAt: -1 });
+    const todoList = await TodoList.find().sort({ createdAt: -1 });
     res.status(200).json(todoList);
   } catch (error) {
     res.status(404).json({ message: error.message });
