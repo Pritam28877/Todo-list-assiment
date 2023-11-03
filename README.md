@@ -46,8 +46,7 @@ This repository contains a TodoList web application built using the MERN (MongoD
 ### Frontend
 - React
 - React Router
-- Axios
-- Bootstrap (or any other UI library used)
+- css
 
 ## Folder Structure
 
