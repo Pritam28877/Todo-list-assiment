@@ -26,7 +26,7 @@ This repository contains a TodoList web application built using the MERN (MongoD
 
 1. Navigate to the `frontend` directory: `cd frontend`
 2. Install frontend dependencies: `npm install`
-3. Start the frontend: `npm start`
+3. Start the frontend: `npm run dev`
 
 ## Usage
 
