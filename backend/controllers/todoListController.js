@@ -29,6 +29,17 @@ exports.getTodo = async (req, res) => {
 //create a todo
 exports.createTodo = async (req, res) => {
   const { title, task } = req.body;
+  let errors = [];
+
+  if (!title) {
+    errors.push({ text: "Please add a title" });
+  }
+  if (!task) {
+    errors.push({ text: "Please add a task" });
+  }
+  if (errors.length > 0) {
+    res.status(400).json({ message: "Please fill in all the field" });
+  }
   try {
     const newTodo = await TodoList.create({ title, task });
     res.status(201).json(newTodo);

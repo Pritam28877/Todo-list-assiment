@@ -7,6 +7,7 @@ const TodoForm = ({ selectedTodo, setSelectedTodo }) => {
   const [task, setTask] = useState("");
   const [error, setError] = useState(null);
   const [isUpdating, setIsUpdating] = useState(false);
+  const [empty, setEmpty] = useState([]);
 
   const clearForm = () => {
     setTitle("");
@@ -87,6 +88,7 @@ const TodoForm = ({ selectedTodo, setSelectedTodo }) => {
         required
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        className={empty.includes("title") ? "error" : ""}
       />
       <label>Todo task:</label>
       <input
@@ -94,6 +96,7 @@ const TodoForm = ({ selectedTodo, setSelectedTodo }) => {
         required
         value={task}
         onChange={(e) => setTask(e.target.value)}
+        className={empty.includes("task") ? "error" : ""}
       />
       <button type="submit">{isUpdating ? "Update" : "Add"}</button>
       {error && <p className="error">{error}</p>}

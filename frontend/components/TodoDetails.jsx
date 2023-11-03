@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 import { useTodoContext } from "../hooks/useTodoContext.jsx";
 import { TODOLIST_ACTIONS } from "../context/todoContext.jsx";
+import Edit from "../icons/Edit.jsx";
+import Delete from "../icons/Delete.jsx";
 const TodoDetails = ({ todo, onEdit }) => {
   const handleEdit = () => {
     onEdit(todo);
@@ -23,11 +25,20 @@ const TodoDetails = ({ todo, onEdit }) => {
   };
   return (
     <div className="todo-details">
-      <h4>{todo.title}</h4>
-      <p>{todo.task}</p>
-      <p>{todo.createdAt}</p>
-      <button onClick={handleEdit}>Edit</button>
-      <button onClick={handleDelete}>Delete</button>
+      <div>
+        <h4>{todo.title}</h4>
+        <p>{todo.task}</p>
+        <p>{todo.createdAt}</p>
+      </div>
+      <div>
+        <div className="icon-button" onClick={handleEdit}>
+          <Edit></Edit>
+        </div>
+
+        <div className="icon-button" onClick={handleDelete}>
+          <Delete />
+        </div>
+      </div>
     </div>
   );
 };
