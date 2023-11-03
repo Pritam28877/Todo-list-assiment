@@ -66,7 +66,7 @@ exports.updateTodo = async (req, res) => {
   );
   console.log(updatetodo);
   if (!updatetodo) {
-    return res.status(400).json({ error: "gg" });
+    return res.status(400).json({ error: error.message || "No such workout " });
   }
 
   res.status(200).json(updatetodo);
