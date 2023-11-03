@@ -3,10 +3,17 @@ const express = require("express");
 const mongoose = require("mongoose");
 const todoRoutes = require("./routes/todoRoutes");
 const Db = require("./config/mongoose");
+const cors = require("cors");
 
 const app = express();
 
 // middleware
+app.use(
+  cors({
+    credentials: true,
+    origin: process.env.CLIENT_URL,
+  })
+);
 app.use(express.json());
 
 // routes
