@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const todoRoutes = require("./routes/todoRoutes");
 const Db = require("./config/mongoose");
 const cors = require("cors");
+const methodOverride = require("method-override");
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(methodOverride("_method"));
 
 // routes
 app.use("/api/todoList", todoRoutes);

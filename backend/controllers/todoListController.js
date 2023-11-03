@@ -1,4 +1,5 @@
 const TodoList = require("../models/todoListModel");
+const mongoose = require("mongoose");
 //get all todos
 exports.getAllTodos = async (req, res) => {
   try {
@@ -38,18 +39,26 @@ exports.createTodo = async (req, res) => {
 
 //update a todo
 exports.updateTodo = async (req, res) => {
-  const { id } = req.params;
-  const { title, task } = req.body;
-  try {
-    const updatedTodo = await TodoList.findByIdAndUpdate(
-      id,
-      { title, task },
-      { new: true }
-    );
-    res.status(200).json(updatedTodo);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
+  const { _id } = req.body;
+  console.log(req.body);
+  console.log(_id);
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    return res.status(400).json({ error: "No such workout" });
   }
+
+  const updatetodo = await TodoList.findOneAndUpdate(
+    { _id: _id },
+    {
+      ...req.body,
+    },
+    { new: true } // This will return the updated document
+  );
+  console.log(updatetodo);
+  if (!updatetodo) {
+    return res.status(400).json({ error: "gg" });
+  }
+
+  res.status(200).json(updatetodo);
 };
 
 //delete a todo
