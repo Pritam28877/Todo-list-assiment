@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { useTodoContext } from "../hooks/useTodoContext.jsx";
 import { TODOLIST_ACTIONS } from "../context/todoContext.jsx";
+import { useAuthContext } from "../hooks/useAuthContext.jsx";
 const TodoForm = ({ selectedTodo, setSelectedTodo }) => {
+  const { user } = useAuthContext();
   const { dispatch } = useTodoContext();
   const [title, setTitle] = useState("");
   const [task, setTask] = useState("");
@@ -23,7 +25,10 @@ const TodoForm = ({ selectedTodo, setSelectedTodo }) => {
       `http://localhost:8000/api/todoList/${selectedTodo.id}`,
       {
         method: "PUT",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${user.token}`,
+        },
         body: JSON.stringify(updatedTodo),
       }
     );
@@ -51,10 +56,13 @@ const TodoForm = ({ selectedTodo, setSelectedTodo }) => {
       console.log(todo);
       const response = await fetch("http://localhost:8000/api/todoList", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${user.token}`,
+        },
         body: JSON.stringify(todo),
       });
-      // console.log(response);
+      console.log(response);
       const json = await response.json();
       if (!response.ok) {
         setError(json.message);

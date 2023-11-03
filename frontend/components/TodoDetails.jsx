@@ -1,19 +1,27 @@
 import PropTypes from "prop-types";
 import { useTodoContext } from "../hooks/useTodoContext.jsx";
 import { TODOLIST_ACTIONS } from "../context/todoContext.jsx";
+import { useAuthContext } from "../hooks/useAuthContext.jsx";
 import Edit from "../icons/Edit.jsx";
 import Delete from "../icons/Delete.jsx";
 const TodoDetails = ({ todo, onEdit }) => {
+  const { user } = useAuthContext();
+ 
   const handleEdit = () => {
     onEdit(todo);
   };
   const { dispatch } = useTodoContext();
   const handleDelete = async () => {
     console.log(todo._id);
+    const token = localStorage.getItem("token");
+    console.log(token);
     const response = await fetch(
       `http://localhost:8000/api/todoList/${todo._id}`,
       {
         method: "DELETE",
+        headers: {
+          "Authorization": `Bearer ${user.token}`,
+        },
       }
     );
     const json = await response.json();

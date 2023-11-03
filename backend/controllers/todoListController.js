@@ -1,9 +1,10 @@
 const TodoList = require("../models/todoListModel");
+
 const mongoose = require("mongoose");
 //get all todos
 exports.getAllTodos = async (req, res) => {
   try {
-    const todoList = await TodoList.find().sort({ createdAt: -1 });
+    const todoList = await TodoList.find({ user_id }).sort({ createdAt: -1 });
     res.status(200).json(todoList);
   } catch (error) {
     res.status(404).json({ message: error.message });
@@ -28,7 +29,9 @@ exports.getTodo = async (req, res) => {
 
 //create a todo
 exports.createTodo = async (req, res) => {
+  console.log(req.headers);
   const { title, task } = req.body;
+  console.log(req.user);
   let errors = [];
 
   if (!title) {
@@ -41,7 +44,9 @@ exports.createTodo = async (req, res) => {
     res.status(400).json({ message: "Please fill in all the field" });
   }
   try {
-    const newTodo = await TodoList.create({ title, task });
+    const user_id = req.user._id;
+    const newTodo = await TodoList.create({ title, task, user_id });
+    console.log(newTodo);
     res.status(201).json(newTodo);
   } catch (error) {
     res.status(400).json({ message: error.message });
