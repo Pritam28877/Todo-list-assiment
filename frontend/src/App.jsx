@@ -4,7 +4,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
 import NavBar from "../components/NavBar";
 import Login from "./pages/Login";
-import Signup from "./pages/Signup";
+import Signup from "./pages/SignUp";
 import { useAuthContext } from "../hooks/useAuthContext";
 function App() {
   const { user } = useAuthContext();
