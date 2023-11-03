@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import TodoDetails from "../../components/TodoDetails";
+import TodoForm from "../../components/TodoForm";
 
 const Home = () => {
   const [todoList, setTodoList] = useState([]);
@@ -17,6 +18,7 @@ const Home = () => {
         {todoList &&
           todoList.map((todo) => <TodoDetails key={todo.id} todo={todo} />)}
       </div>
+      <TodoForm />
     </div>
   );
 };
