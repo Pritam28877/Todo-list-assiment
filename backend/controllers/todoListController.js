@@ -3,6 +3,8 @@ const TodoList = require("../models/todoListModel");
 const mongoose = require("mongoose");
 //get all todos
 exports.getAllTodos = async (req, res) => {
+  const user_id = req.user._id;
+  console.log(user_id);
   try {
     const todoList = await TodoList.find({ user_id }).sort({ createdAt: -1 });
     res.status(200).json(todoList);
@@ -29,9 +31,8 @@ exports.getTodo = async (req, res) => {
 
 //create a todo
 exports.createTodo = async (req, res) => {
-  console.log(req.headers);
   const { title, task } = req.body;
-  console.log(req.user);
+  // console.log(req.user);
   let errors = [];
 
   if (!title) {

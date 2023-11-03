@@ -16,9 +16,9 @@ const Home = () => {
   useEffect(() => {
     const fetchTodoList = async () => {
       const response = await fetch("http://localhost:8000/api/todoList", {
-        headers: {'Authorization': `Bearer ${user.token}`},
+        headers: { Authorization: `Bearer ${user.token}` },
       });
-      const data = await response.json();
+      const data = await response.json();      
       if (response.ok) {
         dispatch({ type: TODOLIST_ACTIONS.SET_TODO, payload: data });
       }

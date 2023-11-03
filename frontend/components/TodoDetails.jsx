@@ -13,8 +13,6 @@ const TodoDetails = ({ todo, onEdit }) => {
   const { dispatch } = useTodoContext();
   const handleDelete = async () => {
     console.log(todo._id);
-    const token = localStorage.getItem("token");
-    console.log(token);
     const response = await fetch(
       `http://localhost:8000/api/todoList/${todo._id}`,
       {

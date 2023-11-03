@@ -62,8 +62,7 @@ const TodoForm = ({ selectedTodo, setSelectedTodo }) => {
         },
         body: JSON.stringify(todo),
       });
-      console.log(response);
-      const json = await response.json();
+         const json = await response.json();
       if (!response.ok) {
         setError(json.message);
       }
