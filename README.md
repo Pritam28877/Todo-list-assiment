@@ -14,6 +14,7 @@ This repository contains a TodoList web application built using the MERN (MongoD
 
 1. Clone this repository: `git clone <repository_url>`
 2. Navigate to the `mern-todolist` directory: `cd Todo-list-assiment`
+3. Mongodb should be install locally in your device 
 
 ### Backend (Node.js & Express)
 
